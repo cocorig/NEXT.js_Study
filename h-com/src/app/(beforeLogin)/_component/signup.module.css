@@ -4,11 +4,11 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.4);
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal {
@@ -20,7 +20,7 @@
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  height: 450px;
+  height: 550px;
 }
 
 .modalHeader {
@@ -82,15 +82,13 @@
   background-color: rgb(15, 20, 25);
   color: white;
   font-size: 17px;
-  cursor: pointer;
-  border: none;
 }
 .actionButton:disabled {
   opacity: 0.5;
 }
-.actionButton:hover {
+/* .actionButton:hover {
   background-color: rgb(39, 44, 48);
-}
+} */
 
 .closeButton {
   width: 34px;
@@ -108,7 +106,4 @@
 }
 .closeButton:hover {
   background-color: rgba(15, 20, 25, 0.1);
-}
-.loginTxt {
-  color: black;
 }
