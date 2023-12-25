@@ -111,3 +111,19 @@ export default function Home() {
   );
 }
 ```
+
+## 모달
+
+### 병렬 라우팅(Parallel Routing)
+
+- 동시에 또는 조건에 따라 동일한 레이아웃에서 하나 이상의 페이지를 렌더링할 수 있게 해준다.
+- 페이지를 옮겨도 뒤에 화면에 남아있어야함, 두가지 페이지를 한 페이지에 같이 띄워줄 수 있음
+- 같은 폴더에 있고, Parallel Routes는 layout에서 쓸 수 있음
+
+- 기본값 (default.tsx) : Parallel Routing가 필요 없을 때
+
+### Intercepting Routes
+
+- 서버 컴포넌트 : 데이터와 관련이 있음
+- 클라이언트 컴포넌트
+  - "use client"; 위에 써줘야 react hook사용가능
