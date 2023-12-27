@@ -1,15 +1,14 @@
 import React, { ReactNode } from "react";
-import style from "@/app/create/create.module.css";
 interface CreateLayoutProps {
   children: ReactNode;
 }
 
-const CreateLayout: React.FC<CreateLayoutProps> = (props) => {
+const CreateLayout: React.FC<CreateLayoutProps> = ({ children }) => {
   return (
-    <form className={style.createForm}>
+    <>
       <h2>생성</h2>
-      {props.children}
-    </form>
+      {children}
+    </>
   );
 };
 
