@@ -20,12 +20,22 @@
     {
       "id": 1,
       "title": "TS",
-      "body": "html is.."
+      "body": "TS is.."
     },
     {
       "id": 2,
       "title": "Next",
-      "body": "css is.."
+      "body": "Next is.."
+    },
+    {
+      "id": 3,
+      "title": "React",
+      "body": "React is.."
+    },
+    {
+      "id": 4,
+      "title": "JS",
+      "body": "JS is.."
     }
   ]
 }

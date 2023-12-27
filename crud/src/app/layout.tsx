@@ -1,5 +1,4 @@
 // 기본적인 레이아웃 골격
-
 import Header from "@/components/Header/Header";
 import type { Metadata } from "next";
 import Link from "next/link";
