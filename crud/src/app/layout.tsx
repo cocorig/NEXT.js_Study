@@ -19,7 +19,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const resp = await fetch("http://localhost:9999/topics");
+  const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}topics`, {
+    cache: "no-store", // Next.js의 캐싱 공부해야 할 숙제!!! , 임시로 캐시 끔
+  });
   const topics = await resp.json();
   // 데이터를 가져오는데 시간이 걸림 , 비효율적, 자바스크립트를 끄면 , 서버와통신하는 서비스는 표현이 x -> 어떻게 해결할까 -> 서버쪽에서 fetch하고, 실행이 끝날때 까지 await , 끝나면 json 으로 바꿔서 topics가져와서 글 목록을 동적으로 가져와 .next폴더에 저장해 정적인 내용만 client로 전달 (이 과정에서 javascript의 코드는 빼고 전달) -> 때문에 용량이 적음,
   console.log(topics);
