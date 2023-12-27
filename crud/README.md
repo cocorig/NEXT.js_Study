@@ -38,3 +38,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## sidebar -> 정보를 표현 , 사용자와 상호작용 기능 x , 단순 보여기직-> 서버 컴포넌트
 
 ## main -> button , 사용자와 상호작용 O -> 클라이언트 컴포넌트
+
+#### prop.params.id는 해당 [id] 폴더안에 page에서 있어야 접근가능 ,
