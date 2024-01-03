@@ -8,7 +8,7 @@ export const useValidation = () => {
 
   const getPasswordError = (password: string) => {
     if (!validatePassword(password)) {
-      return "영어 대문자, 소문자, 숫자, 특수문자 중 3종류 조합하여 8자리 이상으로 입력해 주세요.";
+      return "*영어 대문자, 소문자, 숫자, 특수문자 중 3종류 조합하여 8자리 이상으로 입력해 주세요.";
     }
     return "";
   };
@@ -17,19 +17,20 @@ export const useValidation = () => {
     confirmPassword?: string,
     originalPassword?: string
   ) => {
-    if (originalPassword === "") {
-      return "비밀번호를 먼저 입력해주세요.";
+    if (confirmPassword !== originalPassword || originalPassword === "") {
+      return false;
     }
-    if (confirmPassword !== originalPassword) {
-      return "비밀번호가 일치하지 않습니다.";
-    }
-    return "";
-  };
 
+    return true;
+  };
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    return emailRegex.test(email);
+  };
   const validateRequiredFields = (data: Record<string, string>): string => {
     let hasError = false;
     Object.entries(data).forEach(([key, value]) => {
-      console.log(data);
+      console.log(data.email, data.password);
       if (value.trim() === "" && key !== "address") {
         hasError = true;
       }
@@ -40,5 +41,10 @@ export const useValidation = () => {
     return "";
   };
 
-  return { getPasswordError, validateConfirmPassword, validateRequiredFields };
+  return {
+    getPasswordError,
+    validateConfirmPassword,
+    validateRequiredFields,
+    validateEmail,
+  };
 };

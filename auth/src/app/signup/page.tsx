@@ -1,7 +1,7 @@
 "use client";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useFormState } from "@/lib/useFormState";
+import { FormState } from "@/lib/FormState";
 const SignUpForm = () => {
   const {
     formData,
@@ -14,7 +14,8 @@ const SignUpForm = () => {
     handlePasswordChange,
     handleConfirmPasswordChange,
     handleSubmit,
-  } = useFormState();
+    // handleEmailChange,
+  } = FormState();
 
   return (
     <form onSubmit={handleSubmit}>
@@ -89,7 +90,10 @@ const SignUpForm = () => {
           name="email"
           placeholder="이메일 주소"
           value={formData.email}
-          onChange={handleInputChange}
+          onChange={(e) => {
+            handleInputChange(e);
+            // handleEmailChange(e.target.value);
+          }}
         />
       </div>
       <div>

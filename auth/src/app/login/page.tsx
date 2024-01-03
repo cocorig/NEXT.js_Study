@@ -1,15 +1,14 @@
 "use client";
-
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useFormState } from "@/lib/useFormState";
+import { FormState } from "@/lib/FormState";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 const StyledInput = styled.input<{ isError: boolean }>`
   border-bottom: 2px solid ${(props) => (props.isError ? "red" : "black")};
-  color: ${(props) => (props.isError ? "red" : "black")};
   &::placeholder {
     color: ${(props) => (props.isError ? "red" : "black")};
   }
 `;
-
 export default function LoginPage() {
   const {
     formData,
@@ -17,30 +16,61 @@ export default function LoginPage() {
     errorEmail,
     errorPassword,
     handleSubmit,
-  } = useFormState();
+    handleEmailChange,
+    errorFieldEmail,
+    errorFieldPassword,
+    showPassword,
+    togglePasswordVisibility,
+    handlePasswordChange,
+  } = FormState();
+
+  const [showMessage, setShowMessage] = useState(false);
+  const isLoginInvalid = errorFieldEmail && errorFieldPassword;
+
+  const handleLoginClick = () => {
+    if (isLoginInvalid == false) {
+      setShowMessage(true);
+    }
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <StyledInput
-            type="email"
+            type="text"
             name="email"
             placeholder="이메일을 입력하세요."
             value={formData.email}
-            onChange={handleInputChange}
+            onChange={(e) => {
+              handleInputChange(e);
+              handleEmailChange(e.target.value);
+            }}
             isError={errorEmail}
           />
           <StyledInput
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
-            placeholder="비밀번호를 입력하세요."
+            placeholder="비밀번호"
             value={formData.password}
-            onChange={handleInputChange}
             isError={errorPassword}
+            onChange={(e) => {
+              handleInputChange(e);
+              handlePasswordChange(e.target.value);
+            }}
           />
+          {showMessage && (
+            <p style={{ color: "red" }}>
+              잘못된 이메일 혹은 비밀번호입니다. 다시 입력해주세요.
+            </p>
+          )}
+          <button type="button" onClick={togglePasswordVisibility}>
+            {showPassword ? <FiEyeOff /> : <FiEye />}
+          </button>
         </div>
-        <button type="submit">로그인</button>
+        <button type="submit" onClick={handleLoginClick}>
+          로그인
+        </button>
       </form>
     </div>
   );
