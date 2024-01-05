@@ -41,7 +41,7 @@ const FindInfoContainer = styled.div`
 const Login = () => {
   const [isChecked, setIsChecked] = React.useState(false);
   const {
-    register, //input 요소를 React hook form과 연결해 검증 규칙을 적용할 수 있게 하는 메소드
+    register,
     handleSubmit, // form을 submit했을 때 실행할 함수
     formState: { errors }, // form state에 관한 정보를 담고 있는 객체 , error :  input 값들의 에러 정보를 가지고 있는 객체
     getValues, //input 값을 가져올 수 있는 함수
@@ -97,7 +97,6 @@ const Login = () => {
           <Link href="/">비밀번호 찾기</Link>
         </FindInfoContainer>
       </LoginInfo>
-      {/* sns login */}
       <Providers>
         <LoginButton />
       </Providers>

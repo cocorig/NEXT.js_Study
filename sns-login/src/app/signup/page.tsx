@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+// import { addUserToCollection } from "../../../firebaseConfig";
 type SignUpInputs = {
   nickname: string;
   email: string;
@@ -84,24 +85,24 @@ const SignUp: React.FC = () => {
         FullEmail,
         Address,
       };
+      console.log(Data);
 
-      // 여기서 서버로 데이터 전송
-      const response = await fetch("/api/auth/signup", {
+      // await addUserToCollection(Data);
+      const response = await fetch("api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(Data),
+        body: JSON.stringify({ Data }),
       });
-
       if (response.ok) {
         const responseData = await response.json();
-        console.log("Server response:", responseData);
+        console.log(responseData); // API 응답 처리
       } else {
-        console.error("Server error:", response.statusText);
+        throw new Error("Failed to send data");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error(error);
     }
   };
   const handleNonNumericInput = (
