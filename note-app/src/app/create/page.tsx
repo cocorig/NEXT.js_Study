@@ -1,6 +1,6 @@
 import React from "react";
 import FormPost from "@/components/FormPost";
-import BackButton from "@/components/backButton";
+import BackButton from "@/components/BackButton";
 const CreatePage = () => {
   return (
     <div>
