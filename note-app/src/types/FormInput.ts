@@ -1,5 +1,5 @@
-export type FormInputPost = {
+export interface FormInputPost {
   title: string;
   content: string;
   tag: string;
-};
+}
