@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PenLine, Trash2 } from "lucide-react";
 const ButtonAction = () => {
   return (
-    <div>
+    <div className="mt-5">
       <Link href="/edit/1" className="btn mr-2">
         <PenLine /> 수정
       </Link>
