@@ -21,6 +21,4 @@ model Post {
   updateAt  DateTime @updatedAt
   tagId     String
   tag       Tag      @relation(fields: [tagId], references: [id])
-
-  @@index([tagId], map: "Post_tagId_fkey")
 }
