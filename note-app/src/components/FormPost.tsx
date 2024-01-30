@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormInputPost } from "@/types/FormInput";
 import axios from "axios";
 import { Tag } from "@prisma/client";
-
+import { useRouter } from "next/navigation";
 interface FormPostProps {
   isEditing?: boolean;
 }
@@ -14,11 +14,10 @@ const FormPost = ({ isEditing }: FormPostProps) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormInputPost>();
-
-  // fetch !! tags list
+  const router = useRouter();
+  // fetch tags list
   const { data: dataTags, isLoading: isLoadingTags } = useQuery<Tag[]>({
     queryKey: ["tags"],
     queryFn: async () => {
@@ -26,21 +25,38 @@ const FormPost = ({ isEditing }: FormPostProps) => {
       return response.data;
     },
   });
-  console.log(dataTags);
-  const onSubmit: SubmitHandler<FormInputPost> = (data) => console.log(data);
+  const { mutate: createPost } = useMutation({
+    mutationFn: async (newPost: FormInputPost) => {
+      const response = await axios.post("/api/posts/create", newPost);
+      return response.data;
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+    onSuccess: () => {
+      router.push("/");
+    },
+  });
+
+  const onSubmit: SubmitHandler<FormInputPost> = (data) => {
+    console.log(data);
+    createPost(data);
+    router.refresh();
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center justify-center gap-5 mt-10"
     >
       <input
-        {...(register("title"), { required: true })}
+        {...register("title", { required: true })}
         type="text"
         placeholder="제목을 입력하세요"
         className="input input-bordered w-full max-w-lg"
       />
       <textarea
-        {...(register("content"), { required: true })}
+        {...register("content", { required: true })}
         className="textarea textarea-bordered resize-none w-full max-w-lg"
         placeholder="노트를 적어보세요"
       ></textarea>
@@ -48,7 +64,7 @@ const FormPost = ({ isEditing }: FormPostProps) => {
         <span className="loading loading-dots loading-md"></span>
       ) : (
         <select
-          {...(register("tag"), { required: true })}
+          {...register("tagId", { required: true })}
           className="select select-bordered  w-full max-w-lg"
         >
           <option defaultValue="option1">Select tags</option>
