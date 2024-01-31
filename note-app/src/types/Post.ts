@@ -7,3 +7,8 @@ export interface PostCardProps {
     tag: Tag;
   };
 }
+export interface ParamsProps {
+  params: {
+    id: string;
+  };
+}
