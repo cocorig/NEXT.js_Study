@@ -1,22 +1,29 @@
 "use client";
-import React from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import React, { FC } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormInputPost } from "@/types/FormInput";
 import axios from "axios";
 import { Tag } from "@prisma/client";
-import { useRouter } from "next/navigation";
 interface FormPostProps {
   isEditing?: boolean;
+  initalValue?: FormInputPost;
+  isLoadingsubmit?: boolean;
+  submit: SubmitHandler<FormInputPost>;
 }
 
-const FormPost = ({ isEditing }: FormPostProps) => {
+const FormPost: FC<FormPostProps> = ({
+  submit,
+  isEditing,
+  initalValue,
+  isLoadingsubmit,
+}: FormPostProps) => {
+  console.log(initalValue);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputPost>();
-  const router = useRouter();
+  } = useForm<FormInputPost>({ defaultValues: initalValue });
   // fetch tags list
   const { data: dataTags, isLoading: isLoadingTags } = useQuery<Tag[]>({
     queryKey: ["tags"],
@@ -25,28 +32,10 @@ const FormPost = ({ isEditing }: FormPostProps) => {
       return response.data;
     },
   });
-  const { mutate: createPost } = useMutation({
-    mutationFn: async (newPost: FormInputPost) => {
-      const response = await axios.post("/api/posts/create", newPost);
-      return response.data;
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-    onSuccess: () => {
-      router.push("/");
-    },
-  });
-
-  const onSubmit: SubmitHandler<FormInputPost> = (data) => {
-    console.log(data);
-    createPost(data);
-    router.refresh();
-  };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(submit)}
       className="flex flex-col items-center justify-center gap-5 mt-10"
     >
       <input
@@ -77,7 +66,14 @@ const FormPost = ({ isEditing }: FormPostProps) => {
       )}
 
       <button type="submit" className="btn btn-primary w-full max-w-lg">
-        {isEditing ? "수정하기" : "추가하기"}
+        {isLoadingsubmit && <span className="loading loa"></span>}
+        {isEditing
+          ? isLoadingsubmit
+            ? "수정 중"
+            : "수정하기"
+          : isLoadingsubmit
+          ? "추가 중"
+          : "추가하기"}
       </button>
     </form>
   );

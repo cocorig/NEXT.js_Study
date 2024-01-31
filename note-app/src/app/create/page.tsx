@@ -1,12 +1,40 @@
+"use client";
 import React from "react";
 import FormPost from "@/components/FormPost";
 import BackButton from "@/components/BackButton";
+
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { FormInputPost } from "@/types/FormInput";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 const CreatePage = () => {
+  const router = useRouter();
+  // fetch post create
+  const { mutate: createPost } = useMutation({
+    mutationFn: async (newPost: FormInputPost) => {
+      const response = await axios.post("/api/posts/create", newPost);
+      return response.data;
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+    onSuccess: () => {
+      router.push("/");
+    },
+  });
+
+  const handleCreatePost: SubmitHandler<FormInputPost> = (data) => {
+    console.log(data);
+    createPost(data);
+    router.refresh();
+  };
+
   return (
     <div>
       <BackButton />
       <h1 className="text-2xl my-4 font-bold text-center">Note 추가</h1>
-      <FormPost />
+      <FormPost submit={handleCreatePost} isEditing={false} />
     </div>
   );
 };
