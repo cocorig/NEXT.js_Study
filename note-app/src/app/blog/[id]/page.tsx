@@ -3,11 +3,8 @@ import ButtonAction from "@/components/ButtonAction";
 import BackButton from "@/components/BackButton";
 import { db } from "@/lib/db";
 import { FC } from "react";
-interface BlogDetailPageProps {
-  params: {
-    id: string;
-  };
-}
+import { ParamsProps } from "@/types/Post";
+
 async function getPost(id: string) {
   const response = await db.post.findFirst({
     where: {
@@ -22,9 +19,9 @@ async function getPost(id: string) {
   });
   return response;
 }
-const BlogDetailPage: FC<BlogDetailPageProps> = async ({ params }) => {
+const BlogDetailPage: FC<ParamsProps> = async ({ params }) => {
   const post = await getPost(params.id);
-  const { title, content, tag } = post;
+  const { title, content, tag, id } = post;
   console.log(post);
   return (
     <div>
@@ -34,7 +31,7 @@ const BlogDetailPage: FC<BlogDetailPageProps> = async ({ params }) => {
       </div>
       <p className="text-slate-700 mb-4">{content}</p>
       <div className="badge badge-outline">{tag.name}</div>
-      <ButtonAction />
+      <ButtonAction id={id} />
     </div>
   );
 };
