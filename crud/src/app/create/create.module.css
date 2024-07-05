@@ -1,7 +1,0 @@
-.createForm {
-  background: pink;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 30px;
-}
