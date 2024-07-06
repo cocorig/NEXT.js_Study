@@ -1,3 +1,11 @@
+import Tab from "./_component/tab/Tab";
+import { TabProvider } from "./_component/TabProvider";
 export default function Home() {
-  return <div>홈</div>;
+  return (
+    <div>
+      <TabProvider>
+        <Tab />
+      </TabProvider>
+    </div>
+  );
 }

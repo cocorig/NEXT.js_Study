@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.userImage {
+  display: flex;
+  align-items: center;
+}
+.userImage img {
+  border-radius: 50%;
+}
+.userName {
+  margin: 0 12px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.userName span:first-child {
+  font-weight: bold;
+}

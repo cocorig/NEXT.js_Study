@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  background-color: rgb(var(--background-end-rgb));
+  background-color: #000;
   width: 100dvw;
   height: 100dvh;
 }

@@ -1,0 +1,116 @@
+.container {
+  display: flex;
+  align-items: stretch;
+  background-color: #fff;
+}
+/* left */
+.leftSectionWrapper {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.leftSection {
+  width: 275px;
+  padding: 0 8px;
+  height: 100dvh;
+  position: relative;
+}
+.leftSectionFixed {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  top: 0;
+  height: 100%;
+}
+.leftNavBar {
+  flex: 1;
+}
+.logo {
+  display: inline-block;
+  height: 56px;
+  margin-top: 2px;
+}
+.logoPill {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logoPill:hover {
+  background-color: rgb(15, 20, 25, 0.1);
+}
+.postButton {
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
+  background-color: rgb(29, 155, 240);
+  width: 234px;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 26px;
+}
+
+.postButton:hover {
+  background-color: rgb(26, 140, 216);
+}
+
+/* right */
+.rightMainWrapper {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start;
+  height: 100dvh;
+  flex-direction: column;
+}
+.rightMainInner {
+  height: 100%;
+  width: 990px;
+  display: flex;
+  justify-content: space-between;
+}
+.rightSectionLeft {
+  width: 600px;
+  height: 200dvh;
+}
+
+.rightSectionRight {
+  width: 350px;
+  height: 100%;
+}
+
+/*search */
+
+.search {
+  position: fixed;
+  margin-bottom: 12px;
+  margin-top: 6px;
+  height: 42px;
+  width: inherit;
+  border-radius: 21px;
+  background-color: rgb(32, 35, 39);
+  color: rgb(113, 118, 123);
+  display: flex;
+  align-items: center;
+}
+.search input {
+  outline: none;
+  background-color: inherit;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  color: #fff;
+}
+.search svg {
+  padding-left: 20px;
+  fill: currentcolor;
+}

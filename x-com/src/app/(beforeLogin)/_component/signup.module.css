@@ -16,7 +16,7 @@
   }
 }
 .modal {
-  background-color: rgb(var(--background-end-rgb));
+  background-color: #fff;
   position: relative;
   top: 5%;
   max-width: 80vw;
