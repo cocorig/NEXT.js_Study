@@ -15,3 +15,6 @@ export default function RootLayout({
     </html>
   );
 }
+
+// overflow: hidden;
+// overscroll-behavior-y: none;

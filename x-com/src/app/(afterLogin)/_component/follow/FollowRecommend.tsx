@@ -1,7 +1,7 @@
 "use client";
 
 import style from "./followRecommend.module.css";
-import UserCard from "../UserCard";
+import UserCard from "../user/UserCard";
 
 export default function FollowRecommend() {
   const onFollow = () => {};

@@ -1,5 +1,5 @@
 import style from "./userCard.module.css";
-import Image from "next/image";
+import UserImage from "./UserImage";
 
 interface UserCardProps {
   id: string;
@@ -10,9 +10,7 @@ interface UserCardProps {
 export default function UserCard({ id, nickname, image }: UserCardProps) {
   return (
     <div className={style.container}>
-      <div className={style.userImage}>
-        <Image src={image} alt={id} width={40} height={40} />
-      </div>
+      <UserImage id={id} image={image} />
       <div className={style.userName}>
         <span>{nickname}</span>
         <span>@{id}</span>
