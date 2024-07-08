@@ -4,26 +4,42 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 import ActionButtons from "../button/ActionButtons";
+import PostImages from "./PostImages";
+import PostArticle from "./PostArticle";
 import style from "./post.module.css";
-
+import { faker } from "@faker-js/faker";
 // https://day.js.org/
 dayjs.locale("ko"); // 한글화
 dayjs.extend(relativeTime);
 
-export default function Post() {
+type Props = {
+  noImage?: boolean;
+};
+
+export default function Post({ noImage }: Props) {
   const target = {
     User: {
       id: "haha",
       nickname: "coco",
       image: "/profile.jpeg",
     },
+    postId: 1432244242353453,
     content: "고양이 구경하고 가세요~",
     createdAt: new Date(),
-    Images: [],
+    Images: [] as any[],
   };
-
+  // 이미지 없을 경우 테스트, 반반의 확률로 계산
+  if (Math.random() > 0.5 && !noImage) {
+    target.Images.push(
+      { imageId: 1, link: faker.image.urlLoremFlickr() },
+      { imageId: 2, link: faker.image.urlLoremFlickr() }
+      //{ imageId: 3, link: faker.image.urlLoremFlickr() }
+      // { imageId: 4, link: faker.image.urlLoremFlickr() }
+    );
+  }
+  // article 클릭시 /userid/status/postid로 이동 ,post 상세보기
   return (
-    <article className={style.post}>
+    <PostArticle post={target}>
       <div className={style.postWrapper}>
         {/* postUserSection */}
         <div className={style.postUserSection}>
@@ -53,12 +69,15 @@ export default function Post() {
           </div>
           {/* postContent */}
           <div>{target.content}</div>
-          {/* postImage */}
-          <div className={style.postImageSection}></div>
+          {/* postImageSection */}
+          <div>
+            <PostImages post={target} />
+          </div>
         </div>
       </div>
       {/* buttonGroups */}
       <ActionButtons />
-    </article>
+    </PostArticle>
   );
 }
+//    /{Userid}/status/{postId}/photo/1

@@ -73,14 +73,6 @@
   text-decoration: underline;
 }
 
-/* postImage */
-.postImageSection {
-}
-.postImageSection img {
-  margin-top: 12px;
-  width: 100%;
-  border-radius: 16px;
-}
 .postReposted {
   display: flex;
   align-items: center;

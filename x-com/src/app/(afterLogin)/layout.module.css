@@ -25,6 +25,7 @@
   top: 0;
   height: 100%;
 }
+
 .leftNavBar {
   flex: 1;
 }
@@ -45,14 +46,15 @@
   background-color: rgb(15, 20, 25, 0.1);
 }
 .postButton {
-  margin: 16px 0;
+  width: 90%;
+  min-width: 52px;
+  min-height: 52px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 52px;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
   background-color: rgb(29, 155, 240);
-  width: 234px;
+  margin: 16px 0;
   border: none;
   color: rgb(255, 255, 255);
   font-weight: 700;
@@ -63,7 +65,40 @@
 .postButton:hover {
   background-color: rgb(26, 140, 216);
 }
+@media all and (min-width: 1285px) {
+  .postButton span {
+    display: inline-block;
+  }
+  .postButton svg {
+    display: none;
+  }
+}
 
+@media (max-width: 1285px) {
+  .leftSection {
+    width: 88px;
+  }
+  .leftSectionFixed {
+    align-items: center;
+  }
+  .postButton {
+    width: 0%;
+  }
+  .postButton span {
+    display: none;
+  }
+  .postButton svg {
+    display: inline-block;
+    fill: white;
+    width: 24px;
+  }
+}
+
+@media (max-width: 598px) {
+  .leftSection {
+    width: 68px;
+  }
+}
 /* right */
 .rightMainWrapper {
   display: flex;
@@ -87,7 +122,22 @@
   width: 350px;
   height: 100%;
 }
+@media (max-width: 1077px) {
+  .rightSectionRight {
+    width: 290px;
+    height: 100%;
+  }
 
+  .rightMainInner {
+    width: 920px;
+  }
+}
+
+@media (max-width: 990px) {
+  .rightSectionRight {
+    display: none;
+  }
+}
 /*search */
 
 .search {

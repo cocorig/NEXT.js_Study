@@ -1,0 +1,80 @@
+.postImageSection {
+  display: inline-block;
+  margin-top: 12px;
+  width: 100%;
+  border-radius: 16px;
+}
+.postImageSection img {
+  border-radius: 16px;
+  max-height: 510px;
+  width: 100%;
+}
+
+/* 이미지 한 장일 때  */
+.postImageSection.oneImage {
+  max-height: 510px;
+  background-repeat: no-repeat;
+}
+
+/* 이미지  두 장일 때  */
+.postImageSection.twoImage {
+  height: 272px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.postImageSection.twoImage a:first-child {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.postImageSection.twoImage a:last-child {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+/* 이미지  세 장일 때  */
+.postImageSection.threeImage {
+  height: 272px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.postImageSection.threeImage > div {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+}
+
+.postImageSection.threeImage > a:first-child {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.postImageSection.threeImage > div > a:first-child {
+  border-top-right-radius: 16px;
+}
+.postImageSection.threeImage > div > a:last-child {
+  border-bottom-right-radius: 16px;
+}
+/* 이미지  네 장일 때  */
+.postImageSection.fourImage {
+  height: 272px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.postImageSection.fourImage > a {
+  flex: 1 1 calc(50% - 2px);
+}
+.postImageSection.fourImage > a:nth-child(1) {
+  border-top-left-radius: 16px;
+}
+.postImageSection.fourImage > a:nth-child(2) {
+  border-top-right-radius: 16px;
+}
+.postImageSection.fourImage > a:nth-child(3) {
+  border-bottom-left-radius: 16px;
+}
+.postImageSection.fourImage > a:nth-child(4) {
+  border-bottom-right-radius: 16px;
+}

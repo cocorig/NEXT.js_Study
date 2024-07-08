@@ -2,6 +2,7 @@
 
 import style from "./logoutButton.module.css";
 import UserCard from "../user/UserCard";
+import UserImage from "../user/UserImage";
 
 export default function LogoutButton() {
   const me = {
@@ -15,7 +16,13 @@ export default function LogoutButton() {
 
   return (
     <button className={style.logOutButton} onClick={onLogout}>
-      <UserCard {...me} />
+      <div className={style.container}>
+        <UserImage id={me.id} image={me.image} />
+        <div className={style.userName}>
+          <span>{me.nickname}</span>
+          <span>@{me.id}</span>
+        </div>
+      </div>
     </button>
   );
 }

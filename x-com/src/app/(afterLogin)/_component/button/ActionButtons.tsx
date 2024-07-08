@@ -1,11 +1,17 @@
 "use client";
 
+import { tr } from "@faker-js/faker";
 import style from "./actionButton.module.css";
 import cx from "classnames";
 // classnames:조건부로 클래스를 다르게 줄 수 있는 라이브러리,https://www.npmjs.com/package/classnames
-export default function ActionButtons() {
-  const commented = false;
-  const reposted = false;
+
+type Props = {
+  white?: boolean;
+};
+
+export default function ActionButtons({ white }: Props) {
+  const commented = true;
+  const reposted = true;
   const liked = false;
 
   const onClickComment = () => {};
@@ -16,7 +22,11 @@ export default function ActionButtons() {
     <div className={style.actionButtons}>
       {/* commentButton */}
       <div
-        className={cx(style.commentButton, { [style.commented]: commented })}
+        className={cx(
+          style.commentButton,
+          { [style.commented]: commented },
+          white && style.white
+        )}
       >
         <button onClick={onClickComment}>
           <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
@@ -28,7 +38,13 @@ export default function ActionButtons() {
         <div className={style.count}>{1 || ""}</div>
       </div>
       {/* repostButton, reposted가 ture면 .repostButton.reposted */}
-      <div className={cx(style.repostButton, reposted && style.reposted)}>
+      <div
+        className={cx(
+          style.repostButton,
+          reposted && style.reposted,
+          white && style.white
+        )}
+      >
         <button onClick={onClickRepost}>
           <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
             <g>
@@ -39,7 +55,13 @@ export default function ActionButtons() {
         <div className={style.count}>{1 || ""}</div>
       </div>
       {/* heartButton */}
-      <div className={cx([style.heartButton, liked && style.liked])}>
+      <div
+        className={cx([
+          style.heartButton,
+          liked && style.liked,
+          white && style.white,
+        ])}
+      >
         <button onClick={onClickHeart}>
           <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
             <g>
