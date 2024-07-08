@@ -1,6 +1,6 @@
 import style from "./profile.module.css";
 import Post from "../_component/post/Post";
-import BackButton from "../_component/BackButton";
+import BackButton from "../_component/button/BackButton";
 
 export default function Profile() {
   const user = {
