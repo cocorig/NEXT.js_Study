@@ -103,12 +103,15 @@
   font-size: 17px;
 }
 .actionButton:disabled {
-  opacity: 0.5;
+  background-color: rgb(100, 102, 103);
 }
 .actionButton:hover {
   background-color: rgb(39, 44, 48);
 }
-
+.error {
+  font-weight: bold;
+  color: red;
+}
 .closeButton {
   width: 34px;
   height: 34px;

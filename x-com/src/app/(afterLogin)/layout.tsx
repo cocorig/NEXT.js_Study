@@ -75,8 +75,3 @@ Who to follow */}
     </div>
   );
 }
-
-// home일땐 children엔 <Home/>, modal엔 default
-// compose/post 일땐  children엔 <Home/>, modal엔 @modal/compose/post
-// children에 compose/post/page.tsx가 들어가면 안됌
-// 새로고침땐 children엔 compose/post/page.tsx, modal엔 default
