@@ -3,24 +3,38 @@
 import style from "./logoutButton.module.css";
 import UserCard from "../user/UserCard";
 import UserImage from "../user/UserImage";
-
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 export default function LogoutButton() {
-  const me = {
-    // 임시로 내 정보 있는것처럼
-    id: "ha_ye0ni",
-    nickname: "이하연",
-    image: "/profile.jpeg",
-  };
+  const router = useRouter();
+  // client에서 내 정보 불러오기
+  const { data: session } = useSession();
 
-  const onLogout = () => {};
+  /* next auth는 이 속성으로 타입이 고정되어있다.
+export interface User {
+  id?: string
+  name?: string | null
+  email?: string | null
+  image?: string | null
+}
+ */
+  if (!session?.user) {
+    return null;
+  }
+
+  const onLogout = () => {
+    signOut({ redirect: false }).then(() => {
+      router.replace("/");
+    });
+  };
 
   return (
     <button className={style.logOutButton} onClick={onLogout}>
       <div className={style.container}>
-        <UserImage id={me.id} image={me.image} />
+        <UserImage userId={session.user.id!} userImg={session.user.image!} />
         <div className={style.userName}>
-          <span>{me.nickname}</span>
-          <span>@{me.id}</span>
+          <span>{session.user.name}</span>
+          <span>@{session.user.email}</span>
         </div>
       </div>
     </button>

@@ -1,8 +1,9 @@
+// signup.ts 파일 내부
 "use server";
 import { redirect } from "next/navigation";
+import { signIn } from "@/auth"; // 서버컴포넌트 일 때
 
 export async function onSubmit(prevState: any, formData: FormData) {
-  // formData 검증
   if (!formData.get("id") || !(formData.get("id") as string)?.trim()) {
     return { message: "no_id" };
   }
@@ -18,7 +19,6 @@ export async function onSubmit(prevState: any, formData: FormData) {
   if (!formData.get("image")) {
     return { message: "no_image" };
   }
-
   let shouldRedirect = false;
   try {
     const response = await fetch(
@@ -26,20 +26,26 @@ export async function onSubmit(prevState: any, formData: FormData) {
       {
         method: "post",
         body: formData,
-        credentials: "include", // 쿠키전달,로그인한 사람이 회원가입할 때
+        credentials: "include",
       }
     );
-
+    console.log(response.status);
     if (response.status === 403) {
       return { message: "user_exists" };
     }
     console.log(await response.json());
     shouldRedirect = true;
-  } catch (error) {
-    console.error(error);
-    return;
+    await signIn("credentials", {
+      username: formData.get("id"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+  } catch (err) {
+    console.error(err);
+    return { message: null };
   }
+
   if (shouldRedirect) {
-    redirect("/home");
+    redirect("/home"); // try/catch문 안에서 X
   }
 }

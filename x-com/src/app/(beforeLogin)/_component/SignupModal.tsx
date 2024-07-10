@@ -1,28 +1,29 @@
 "use client";
-import style from "./signup.module.css";
-import BackButton from "./BackButton";
-import { onSubmit } from "../_lib/signup";
-import { useFormState, useFormStatus } from "react-dom";
-// ref: https://pl.react.dev/reference/react-dom/hooks/useFormState
 
-function showMessage(massage: string | null | undefined) {
-  if (massage === "no_id") {
+import style from "./signup.module.css";
+import { onSubmit } from "../_lib/signup";
+import BackButton from "@/app/(beforeLogin)/_component/BackButton";
+import { useFormState, useFormStatus } from "react-dom";
+
+function showMessage(messasge: string | null | undefined) {
+  if (messasge === "no_id") {
     return "아이디를 입력하세요.";
   }
-  if (massage === "no_name") {
+  if (messasge === "no_name") {
     return "닉네임을 입력하세요.";
   }
-  if (massage === "no_password") {
+  if (messasge === "no_password") {
     return "비밀번호를 입력하세요.";
   }
-  if (massage === "no_image") {
+  if (messasge === "no_image") {
     return "이미지를 업로드하세요.";
   }
-  if (massage === "user_exists") {
+  if (messasge === "user_exists") {
     return "이미 사용 중인 아이디입니다.";
   }
   return "";
 }
+
 export default function SignupModal() {
   const [state, formAction] = useFormState(onSubmit, null);
   const { pending } = useFormStatus();
@@ -87,7 +88,11 @@ export default function SignupModal() {
               </div>
             </div>
             <div className={style.modalFooter}>
-              <button className={style.actionButton} disabled={pending}>
+              <button
+                type="submit"
+                className={style.actionButton}
+                disabled={pending}
+              >
                 가입하기
               </button>
               <div className={style.error}>{showMessage(state?.message)}</div>

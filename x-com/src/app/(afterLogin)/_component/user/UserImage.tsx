@@ -2,14 +2,14 @@ import style from "./userImage.module.css";
 import Image from "next/image";
 
 interface UserImageProps {
-  id: string;
-  image: string;
+  userId: string;
+  userImg: string;
 }
 
-export default function UserImage({ id, image }: UserImageProps) {
+export default function UserImage({ userId, userImg }: UserImageProps) {
   return (
     <div className={style.userImage}>
-      <Image src={image} alt={id} width={40} height={40} />
+      <Image src={userImg} alt={userId} width={40} height={40} />
     </div>
   );
 }
