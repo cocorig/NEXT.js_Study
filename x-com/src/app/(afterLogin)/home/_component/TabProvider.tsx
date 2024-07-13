@@ -20,6 +20,7 @@ export function TabProvider({ children }: TabProviderProps) {
 
 export function useTabContext() {
   const context = useContext(TabContext);
+
   if (!context) {
     throw new Error("useTabContext must be used within a TabProvider");
   }

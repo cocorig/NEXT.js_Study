@@ -6,8 +6,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Tab() {
   const [current, setCurrent] = useState("hot");
-  const router = useRouter(); // 주소 변경
+  const router = useRouter();
   const searchParams = useSearchParams(); // 쿼리가져오기
+
   const onClickHot = () => {
     setCurrent("hot");
     router.replace(`/search?q=${searchParams.get("q")}`);

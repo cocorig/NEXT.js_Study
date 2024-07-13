@@ -1,12 +1,27 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import style from "./rightSearchZone.module.css";
 import SearchForm from "./SearchForm";
 
 export default function RightSearchZone() {
+  const searchParams = useSearchParams();
   const pathname = usePathname();
-  const onChangeFollow = () => {};
-  const onChangeAll = () => {};
+  const router = useRouter();
+
+  const onChangeFollow = () => {
+    // search?q=KWaiker96998&f=live&pf=on
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("pf", "on");
+
+    // 뒤에 pf=on만 추가
+    router.replace(`/search?${newSearchParams.toString()}`);
+  };
+  const onChangeAll = () => {
+    // url 그대로
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete("pf");
+    router.replace(`/search?${newSearchParams.toString()}`);
+  };
 
   //explore
   if (pathname === "/explore") {

@@ -2,15 +2,15 @@ import style from "./search.module.css";
 import BackButton from "@/app/(afterLogin)/_component/button/BackButton";
 import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 import Tab from "./_component/Tab";
-import Post from "../_component/post/Post";
-//  최신텝 :   search?q=곽튜브&src=typed_query&f=live
-// 곽튜브 검색 주소창 /search?q=곽튜브&src=typed_query&f=top
+import SearchResult from "./_component/SearchResult";
+//  /search?q=곽튜브&f=live -> {q: '곽튜브', f: 'live'}
 
-type Props = {
+export type searchParamsProps = {
   searchParams: { q: string; f?: string; pf?: string };
 };
 
-export default function Search({ searchParams }: Props) {
+export default function Search({ searchParams }: searchParamsProps) {
+  console.log("searchParams", searchParams); // { q: '곽튜브', f: 'live' }
   return (
     <main className={style.main}>
       <div className={style.searchTop}>
@@ -25,18 +25,8 @@ export default function Search({ searchParams }: Props) {
         <Tab />
       </div>
       <div className={style.list}>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        {/*<SearchResult searchParams={searchParams} />*/}
+        {/* 검색 결과 */}
+        <SearchResult searchParams={searchParams} />
       </div>
     </main>
   );

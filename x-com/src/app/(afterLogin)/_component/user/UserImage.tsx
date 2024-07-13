@@ -9,7 +9,7 @@ interface UserImageProps {
 export default function UserImage({ userId, userImg }: UserImageProps) {
   return (
     <div className={style.userImage}>
-      <Image src={userImg} alt={userId} width={40} height={40} />
+      <img src={userImg} alt={userId} width={40} height={40} />
     </div>
   );
 }

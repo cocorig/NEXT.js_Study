@@ -10,6 +10,7 @@ import LogoutButton from "@/app/(afterLogin)/_component/button/LogOutButton";
 import TrendSection from "@/app/(afterLogin)/_component/trend/TrendSection";
 import FollowSection from "@/app/(afterLogin)/_component/follow/FollowSection";
 import RightSearchZone from "./_component/RightSearchZone";
+import RQProvider from "./_component/RQProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -19,7 +20,7 @@ type Props = {
 export default async function AfterLoginLayout({ children, modal }: Props) {
   const session = await auth();
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       {/* left */}
       <header className={styles.leftSectionWrapper}>
         <section className={styles.leftSection}>
@@ -59,24 +60,26 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
           </div>
         </section>
       </header>
-      {/* right */}
-      <main className={styles.rightMainWrapper}>
-        <div className={styles.rightMainInner}>
-          {/* main */}
-          <div className={styles.rightSectionLeft}>{children}</div>
-          <section className={styles.rightSectionRight}>
-            {/* search */}
-            <RightSearchZone />
-            {/* 
+      <RQProvider>
+        {/* right */}
+        <main className={styles.rightMainWrapper}>
+          <div className={styles.rightMainInner}>
+            {/* main */}
+            <div className={styles.rightSectionLeft}>{children}</div>
+            <section className={styles.rightSectionRight}>
+              {/* search */}
+              <RightSearchZone />
+              {/* 
 Trends for you */}
-            <TrendSection />
-            {/* 
+              <TrendSection />
+              {/* 
 Who to follow */}
-            <FollowSection />
-          </section>
-        </div>
-      </main>
-      {modal}
-    </div>
+              <FollowSection />
+            </section>
+          </div>
+        </main>
+        {modal}
+      </RQProvider>
+    </main>
   );
 }
