@@ -6,11 +6,11 @@ import {
 import Tab from "./_component/tab/Tab";
 import { TabProvider } from "./_component/TabProvider";
 import PostForm from "./_component/post/PostForm";
-import PostRecommends from "./_component/post/PostRecommends";
 import { getPostRecommends } from "./_lib/getPostRecommends";
 import { queryKeys } from "@/react-query/constants";
 import style from "./home.module.css";
 import TabDecider from "./_component/TabDecider";
+
 export default async function Home() {
   // 서버 데이터 -> queryClient
   const queryClient = new QueryClient();

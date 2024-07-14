@@ -1,16 +1,11 @@
 import style from "./userCard.module.css";
 import UserImage from "./UserImage";
+import { User } from "@/model/User";
 
-interface UserCardProps {
-  id: string;
-  nickname: string;
-  image: string;
-}
-
-export default function UserCard({ id, nickname, image }: UserCardProps) {
+export default function UserCard({ id, nickname, image }: User) {
   return (
     <div className={style.container}>
-      <UserImage id={id} image={image} />
+      <UserImage userId={id} userImg={image} />
       <div className={style.userName}>
         <span>{nickname}</span>
         <span>@{id}</span>

@@ -2,15 +2,13 @@
 
 import style from "./followRecommend.module.css";
 import UserCard from "../user/UserCard";
+import { User } from "@/model/User";
 
-export default function FollowRecommend() {
+interface Props {
+  user: User;
+}
+export default function FollowRecommend({ user }: Props) {
   const onFollow = () => {};
-
-  const user = {
-    id: "elonmusk",
-    nickname: "Elon Musk",
-    image: "/profile.jpg",
-  };
 
   return (
     <div className={style.container}>

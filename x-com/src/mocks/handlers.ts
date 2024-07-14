@@ -178,6 +178,7 @@ export const handlers = [
       },
     ]);
   }),
+  // 유저의 게시글 다 가져오기
   http.get("/api/users/:userId/posts", ({ request, params }) => {
     const { userId } = params;
     return HttpResponse.json([
@@ -218,12 +219,14 @@ export const handlers = [
       },
     ]);
   }),
+  // 유저 상세 정보 가져오기
   http.get("/api/users/:userId", ({ request, params }): StrictResponse<any> => {
     const { userId } = params;
     const found = User.find((v) => v.id === userId);
     if (found) {
       return HttpResponse.json(found);
     }
+    // 계정이 없을 때 에러처리
     return HttpResponse.json(
       { message: "no_such_user" },
       {
@@ -231,6 +234,7 @@ export const handlers = [
       }
     );
   }),
+  // 게시글 하나 가져오기
   http.get("/api/posts/:postId", ({ request, params }): StrictResponse<any> => {
     const { postId } = params;
     if (parseInt(postId as string) > 10) {
@@ -253,6 +257,7 @@ export const handlers = [
       createdAt: generateDate(),
     });
   }),
+  // 게시글의 답글
   http.get("/api/posts/:postId/comments", ({ request, params }) => {
     const { postId } = params;
     return HttpResponse.json([
@@ -293,9 +298,11 @@ export const handlers = [
       },
     ]);
   }),
+  // 팔로우 추천
   http.get("/api/followRecommends", ({ request }) => {
     return HttpResponse.json(User);
   }),
+  // 트렌드 추천
   http.get("/api/trends", ({ request }) => {
     return HttpResponse.json([
       { tagId: 1, title: "제로초", count: 1264 },

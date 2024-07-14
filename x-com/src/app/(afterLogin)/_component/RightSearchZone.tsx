@@ -4,21 +4,15 @@ import style from "./rightSearchZone.module.css";
 import SearchForm from "./SearchForm";
 
 export default function RightSearchZone() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const router = useRouter();
-
+  let newSearchParams = new URLSearchParams(searchParams);
   const onChangeFollow = () => {
-    // search?q=KWaiker96998&f=live&pf=on
-    const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("pf", "on");
-
-    // 뒤에 pf=on만 추가
     router.replace(`/search?${newSearchParams.toString()}`);
   };
   const onChangeAll = () => {
-    // url 그대로
-    const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.delete("pf");
     router.replace(`/search?${newSearchParams.toString()}`);
   };
