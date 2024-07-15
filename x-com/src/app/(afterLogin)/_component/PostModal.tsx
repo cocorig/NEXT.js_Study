@@ -3,43 +3,35 @@
 import style from "./postModal.module.css";
 import { useRef, useState } from "react";
 import UserImage from "@/app/(afterLogin)/_component/user/UserImage";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import BackButton from "./button/BackButton";
 
 export default function PostModal() {
+  const { data: me } = useSession();
+  const router = useRouter;
   const [content, setContent] = useState();
   const imageRef = useRef<HTMLInputElement>(null);
   const onSubmit = () => {};
-  const onClickClose = () => {};
   const onClickButton = () => {};
-  const onChangeContent = () => {};
 
-  const me = {
-    id: "haha",
-    image: "/profile.jpeg",
-  };
+  const onChangeContent = () => {};
 
   return (
     <div className={style.modalBackground}>
       {/* modal */}
       <div className={style.modal}>
         {/* X button */}
-        <button className={style.closeButton} onClick={onClickClose}>
-          <svg
-            width={24}
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            className="r-18jsvk2 r-4qtqp9 r-yyyyoo r-z80fyv r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-19wmn03"
-          >
-            <g>
-              <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
-            </g>
-          </svg>
-        </button>
+        <BackButton />
         {/* modalForm */}
         <form className={style.modalForm} onSubmit={onSubmit}>
           {/* modalBody */}
           <div className={style.modalBody}>
             <div className={style.postUserSection}>
-              <UserImage {...me} />
+              <UserImage
+                userId={me?.user?.id as string}
+                userImg={me?.user?.image as string}
+              />
             </div>
             <div className={style.textAreaDiv}>
               <textarea

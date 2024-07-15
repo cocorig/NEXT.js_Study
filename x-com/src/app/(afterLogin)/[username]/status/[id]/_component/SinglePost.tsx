@@ -9,10 +9,9 @@ import { getSinglePost } from "../_lib/getSinglePost";
 
 type Props = {
   id: string;
+  noImage?: boolean;
 };
-export default function SinglePost({ id }: Props) {
-  console.log(id);
-
+export default function SinglePost({ id, noImage }: Props) {
   const {
     data: post,
     isLoading,
@@ -23,12 +22,24 @@ export default function SinglePost({ id }: Props) {
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
   });
-  if (isLoading) {
-    return <div>게시글 가져오는 중..</div>;
+  if (error) {
+    return (
+      <div
+        style={{
+          height: 100,
+          alignItems: "center",
+          fontSize: 31,
+          fontWeight: "bold",
+          justifyContent: "center",
+          display: "flex",
+        }}
+      >
+        게시글을 찾을 수 없습니다.
+      </div>
+    );
   }
-
   if (!post) {
-    return <div>게시글을 찾을 수 없습니다.</div>;
+    return null;
   }
-  return <Post {...post} />;
+  return <Post post={post} noImage={noImage} />;
 }

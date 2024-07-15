@@ -4,7 +4,6 @@ import PostModal from "@/app/(afterLogin)/_component/PostModal";
 export default function page() {
   return (
     <>
-      진짜 페이지
       <Home />
       <PostModal />
     </>

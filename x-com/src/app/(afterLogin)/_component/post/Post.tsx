@@ -12,7 +12,12 @@ import { Post as IPost } from "@/model/Post";
 dayjs.locale("ko"); // 한글화
 dayjs.extend(relativeTime);
 
-export default function Post(post: IPost) {
+type Props = {
+  post: IPost;
+  noImage?: boolean;
+};
+
+export default function Post({ post, noImage }: Props) {
   // article 클릭시 /userid/status/postid로 이동 ,post 상세보기
 
   return (
@@ -42,9 +47,11 @@ export default function Post(post: IPost) {
           {/* postContent */}
           <div>{post.content}</div>
           {/* postImageSection */}
-          <div>
-            <PostImages post={post} />
-          </div>
+          {!noImage && (
+            <div>
+              <PostImages post={post} />
+            </div>
+          )}
         </div>
       </div>
       {/* buttonGroups */}

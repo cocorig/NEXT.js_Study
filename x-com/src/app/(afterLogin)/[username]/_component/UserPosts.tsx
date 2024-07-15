@@ -24,10 +24,9 @@ export default function UserPosts({ username }: Props) {
   const queryClient = useQueryClient();
   // user정보 가져오기
   const user = queryClient.getQueryData([queryKeys.users, username]);
-  console.log("user", user);
 
   if (user) {
-    return data?.map((post) => <Post key={post.postId} {...post} />);
+    return data?.map((post) => <Post key={post.postId} post={post} />);
   }
   return null;
 }

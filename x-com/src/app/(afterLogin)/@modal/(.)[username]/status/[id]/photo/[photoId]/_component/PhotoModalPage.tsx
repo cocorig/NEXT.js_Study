@@ -1,9 +1,17 @@
 import style from "../photoModal.module.css";
-import { faker } from "@faker-js/faker";
-import Post from "@/app/(afterLogin)/_component/post/Post";
 import CommentForm from "@/app/(afterLogin)/[username]/_component/CommentForm";
-import ActionButtons from "@/app/(afterLogin)/_component/button/ActionButtons";
 import PhotoModalCloseButton from "./PhotoModalCloseButton";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { queryKeys } from "@/react-query/constants";
+import { getSinglePost } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost";
+import { getComments } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getComments";
+import ImageZone from "./ImageZone";
+import Comments from "@/app/(afterLogin)/[username]/status/[id]/_component/Comments";
+import SinglePost from "@/app/(afterLogin)/[username]/status/[id]/_component/SinglePost";
 
 // type Props = {
 //   imageId: number;
@@ -13,42 +21,34 @@ import PhotoModalCloseButton from "./PhotoModalCloseButton";
 //   };
 // };
 
-export default function PhotoModalPage() {
-  const photo = {
-    imageId: 1,
-    link: faker.image.urlLoremFlickr(),
-    Post: {
-      content: faker.lorem.text(),
-    },
-  };
+type Props = {
+  id: string;
+};
+export default async function PhotoModalPage({ id }: Props) {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: [queryKeys.posts, id],
+    queryFn: getSinglePost,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: [queryKeys.posts, id, queryKeys.comments],
+    queryFn: getComments,
+  });
+  const dehydratedState = dehydrate(queryClient);
+
   return (
     <div className={style.container}>
-      <PhotoModalCloseButton />
-      {/* 이미지 */}
-      <div className={style.imageZone}>
-        <img src={photo.link} alt={photo.Post?.content} />
-        <div
-          className={style.image}
-          style={{ backgroundImage: `url(${photo.link})` }}
-        />
-        <div className={style.buttonZone}>
-          <div className={style.buttonInner}>
-            <ActionButtons white />
-          </div>
+      <HydrationBoundary state={dehydratedState}>
+        <PhotoModalCloseButton />
+        {/* 이미지 섹션 */}
+        <ImageZone id={id} />
+        {/* 댓글 섹션*/}
+        <div className={style.commentZone}>
+          <SinglePost id={id} noImage />
+          <CommentForm id={id} />
+          <Comments id={id} />
         </div>
-      </div>
-      {/* 댓글 */}
-      <div className={style.commentZone}>
-        <Post noImage />
-        <CommentForm />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </div>
+      </HydrationBoundary>
     </div>
   );
 }

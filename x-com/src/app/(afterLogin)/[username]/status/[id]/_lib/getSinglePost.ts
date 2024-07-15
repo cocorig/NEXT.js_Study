@@ -7,7 +7,7 @@ export const getSinglePost: QueryFunction<
   const [_1, id] = queryKey;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${id}`,
-    { next: { tags: ["posts", id] }, cache: "no-store" }
+    { next: { tags: ["posts", id] } }
   );
 
   if (!res.ok) {

@@ -5,7 +5,7 @@ import SearchForm from "./SearchForm";
 
 export default function RightSearchZone() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams(); // url을 제거하는 기능은 없기 때문에 URLSearchParams사용
   const pathname = usePathname();
   let newSearchParams = new URLSearchParams(searchParams);
   const onChangeFollow = () => {

@@ -6,4 +6,5 @@ export const queryKeys = {
   followRecommend: "followRecommend",
   search: "search",
   trends: "trends",
+  comments: "comments",
 };

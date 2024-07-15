@@ -5,13 +5,12 @@ type Props = {
 };
 // 경로 slug 얻을 수 있다.
 export default function Page({ params }: Props) {
-  params.username; // elonmusk
-  params.id; // 1
-  params.photoId; // 1
+  const { id } = params;
+
   return (
     <>
       <Home />
-      <PhotoModalPage />
+      <PhotoModalPage id={id} />
     </>
   );
 }
